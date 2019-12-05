@@ -11,12 +11,15 @@ var chartMargin = {
   left: 30
 };
 
+var width = svgWidth - chartMargin.left - chartMargin.right;
+var height = svgHeight - chartMargin.top - chartMargin.bottom;
+
 // Define dimensions of the chart area
 var chartWidth = svgWidth - chartMargin.left - chartMargin.right;//chartWidth = 900
 var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;//chartHeight = 600
 
 // Select body, append SVG area to it, and set the dimensions
-var svg = d3.select(".scatter")
+var svg = d3.select(".chart")
   .append("svg")
   .attr("width", svgWidth)
   .attr("height", svgHeight);
@@ -25,7 +28,7 @@ var svg = d3.select(".scatter")
 // Append a group to the SVG area and shift ('translate') it to the right and down to adhere
 // to the margins set in the "chartMargin" object.
 var chartGroup = svg.append("g")
-.attr("transform", `translate(${chartMargin.left}, ${chartMargin.top})`);
+  .attr("transform", `translate(${chartMargin.left}, ${chartMargin.top})`);
 
 // Load data from data.csv
 d3.csv("/assets/data/data.csv").then(function(acs_Data) {
@@ -34,18 +37,18 @@ d3.csv("/assets/data/data.csv").then(function(acs_Data) {
     // ==============================
     acs_Data.forEach(function(data) {
         data.poverty = +data.poverty;
-        data.healthcare = +data.health;
+        data.healthcare = +data.healthcare;
     });
-
+    console.log(acs_Data);
     // Step 2: Create scale functions
     // ==============================
     var xLinearScale = d3.scaleLinear()
       .domain([20, d3.max(acs_Data, d => d.poverty)])
-      .range([0, 100]);
+      .range([0, width]);
 
     var yLinearScale = d3.scaleLinear()
       .domain([0, d3.max(acs_Data, d => d.healthcare)])
-      .range([100, 0]);
+      .range([height, 0]);
 
     // Step 3: Create axis functions
     // ==============================
