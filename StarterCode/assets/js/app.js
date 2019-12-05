@@ -39,11 +39,11 @@ d3.csv("/assets/data/data.csv").then(function(acs_Data) {
         data.poverty = +data.poverty;
         data.healthcare = +data.healthcare;
     });
-    console.log(acs_Data);
+    //console.log(acs_Data);
     // Step 2: Create scale functions
     // ==============================
     var xLinearScale = d3.scaleLinear()
-      .domain([20, d3.max(acs_Data, d => d.poverty)])
+      .domain([8, d3.max(acs_Data, d => d.poverty)])
       .range([0, width]);
 
     var yLinearScale = d3.scaleLinear()
@@ -58,7 +58,7 @@ d3.csv("/assets/data/data.csv").then(function(acs_Data) {
     // Step 4: Append Axes to the chart
     // ==============================
     chartGroup.append("g")
-      //.attr("transform", `translate(0, ${height})`)
+      .attr("transform", `translate(0, ${height})`)
       .call(bottomAxis);
 
     chartGroup.append("g")
@@ -73,10 +73,25 @@ d3.csv("/assets/data/data.csv").then(function(acs_Data) {
     .attr("cx", d => xLinearScale(d.poverty))
     .attr("cy", d => yLinearScale(d.healthcare))
     .attr("r", "15")
-    .attr("fill", "pink")
+    .attr("fill", "blue")
     .attr("opacity", ".5");
 
- /*     // Step 6: Initialize tool tip
+    var textGroup = chartGroup.selectAll()
+    .data(acs_Data)
+    .enter()
+    .append("text")
+    .attr("x", d => xLinearScale(d.poverty))
+    .attr("y", d => yLinearScale(d.healthcare))
+    .attr("text-anchor", "middle")
+    .attr("font-family", "sans-serif")
+    .attr("font-size", "15px")
+    .attr("fill", "white")
+    //.attr("fill", "white")
+    .text(d => d.abbr);
+
+  });
+/*
+    // Step 6: Initialize tool tip
     // ==============================
     var toolTip = d3.tip()
       .attr("class", "tooltip")
@@ -111,8 +126,9 @@ d3.csv("/assets/data/data.csv").then(function(acs_Data) {
     chartGroup.append("text")
       .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
       .attr("class", "axisText")
-      .text("Hair Metal Band Hair Length (inches)");
-*/
+      .text;
+
   }).catch(function(error) {
     console.log(error);
 });
+*/
