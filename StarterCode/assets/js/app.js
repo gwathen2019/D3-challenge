@@ -86,7 +86,6 @@ d3.csv("/assets/data/data.csv").then(function(acs_Data) {
     .attr("font-family", "sans-serif")
     .attr("font-size", "15px")
     .attr("fill", "white")
-    //.attr("fill", "white")
     .text(d => d.abbr);
 
   });
