@@ -88,6 +88,22 @@ d3.csv("/assets/data/data.csv").then(function(acs_Data) {
     .attr("fill", "white")
     .text(d => d.abbr);
 
+  // Append axes titles
+    chartGroup.append("text")
+    .attr("class", "x label")
+    .attr("text-anchor", "end")
+    .attr("x", width)
+    .attr("y", height - 10)
+    .text("% in Poverty");
+
+    chartGroup.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "end")
+    .attr("y", 6)
+    .attr("dy", ".75em")
+    .attr("transform", "rotate(-90)")
+    .text("Health Care (%)");
+
   });
 /*
     // Step 6: Initialize tool tip
