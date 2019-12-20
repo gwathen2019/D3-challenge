@@ -2,6 +2,7 @@
 
 // The code for the chart is wrapped inside a function
 // that automatically resizes the chart
+/*
 function makeResponsive() {
 
   // if the SVG area isn't empty when the browser loads, remove it
@@ -10,7 +11,7 @@ function makeResponsive() {
   if (!svgArea.empty()) {
     svgArea.remove();
   }
-
+*/
 // Define SVG area dimensions
 var svgWidth = 960;
 var svgHeight = 660;
@@ -51,7 +52,7 @@ d3.csv("/assets/data/data.csv").then(function(acs_Data) {
         data.poverty = +data.poverty;
         data.healthcare = +data.healthcare;
     });
-    //console.log(acs_Data);
+    console.log(acs_Data);
     // Step 2: Create scale functions
     // ==============================
     var xLinearScale = d3.scaleLinear()
@@ -104,6 +105,7 @@ d3.csv("/assets/data/data.csv").then(function(acs_Data) {
     chartGroup.append("text")
     .attr("class", "x label")
     .attr("text-anchor", "middle")
+    .attr("font-weight", "bold")
     .attr("x", width/2)
     .attr("y", height + 40)
     .text("% in Poverty");
@@ -111,12 +113,16 @@ d3.csv("/assets/data/data.csv").then(function(acs_Data) {
     chartGroup.append("text")
     .attr("class", "y label")
     .attr("text-anchor", "middle")
-    .attr("y", height/2)
+    .attr("font-weight", "bold")
+    .attr("x", -250)
+    .attr("y", -50)
+    //.attr("y", height)
     .attr("dy", ".75em")
     .attr("transform", "rotate(-90)")
     .text("Health Care (%)");
 
-//  });
+  });
+
 
 /*    // Step 6: Initialize tool tip
     // ==============================
@@ -154,7 +160,7 @@ d3.csv("/assets/data/data.csv").then(function(acs_Data) {
       .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
       .attr("class", "axisText")
       .text("% in Poverty");
-*/
+
 // Step 1: Append a div to the body to create tooltips, assign it a class
   // =======================================================
   var toolTip = d3.select("body").append("div")
@@ -178,8 +184,4 @@ d3.csv("/assets/data/data.csv").then(function(acs_Data) {
     console.log(error);
   })
 }
-// When the browser loads, makeResponsive() is called.
-makeResponsive();
-
-// When the browser window is resized, responsify() is called.
-d3.select(window).on("resize", makeResponsive);
+*/
