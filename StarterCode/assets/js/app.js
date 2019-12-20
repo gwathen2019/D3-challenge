@@ -121,9 +121,27 @@ d3.csv("/assets/data/data.csv").then(function(acs_Data) {
     .attr("transform", "rotate(-90)")
     .text("Health Care (%)");
 
+  
+
+  // Step 1: Append a div to the body to create tooltips, assign it a class
+  // =======================================================
+  var toolTip = d3.select("body").append("div")
+    .attr("class", "tooltip");
+
+  // Step 2: Add an onmouseover event to display a tooltip
+  // ========================================================
+  circlesGroup.on("mouseover", function(d, i) {
+    toolTip.style("display", "block");
+    toolTip.html(`% in Poverty: <strong>${d.poverty[i]}</strong>`)
+      .style("left", d3.event.pageX + "px")
+      .style("top", d3.event.pageY + "px");
+  })
+    // Step 3: Add an onmouseout event to make the tooltip invisible
+    .on("mouseout", function() {
+      toolTip.style("display", "none");
+    });
   });
-
-
+  
 /*    // Step 6: Initialize tool tip
     // ==============================
     var toolTip = d3.tip()
@@ -160,25 +178,6 @@ d3.csv("/assets/data/data.csv").then(function(acs_Data) {
       .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
       .attr("class", "axisText")
       .text("% in Poverty");
-
-// Step 1: Append a div to the body to create tooltips, assign it a class
-  // =======================================================
-  var toolTip = d3.select("body").append("div")
-    .attr("class", "tooltip");
-
-  // Step 2: Add an onmouseover event to display a tooltip
-  // ========================================================
-  circlesGroup.on("mouseover", function(d, i) {
-    toolTip.style("display", "block");
-    toolTip.html(`% in Poverty: <strong>${d.poverty[i]}</strong>`)
-      .style("left", d3.event.pageX + "px")
-      .style("top", d3.event.pageY + "px");
-  })
-    // Step 3: Add an onmouseout event to make the tooltip invisible
-    .on("mouseout", function() {
-      toolTip.style("display", "none");
-    });
-
 
   }).catch(function(error) {
     console.log(error);
