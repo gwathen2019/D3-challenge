@@ -34,12 +34,24 @@
   fill: #89bdd3;
   stroke: #e3e3e3;
 }
-
+/*
 .chart {
   display: block;
   margin: 0;
 }
+*/
+.chart {
+  width:50%;
+  height:50%;
+  border: 1px dotted silver;
+}
 
+
+.chart-container {
+  width:50%;
+  height:50%;
+  border: 1px dotted silver;
+}
 .d3-tip {
   padding: 6px;
   font-size: 12px;
