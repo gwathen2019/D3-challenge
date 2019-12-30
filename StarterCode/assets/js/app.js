@@ -12,9 +12,6 @@ function makeResponsive() {
     svgArea.remove();
   }
 }
-// Define SVG area dimensions
-//var svgWidth = 1000;
-//var svgHeight = 700;
 
 // Define the chart's margins as an object
 var chartMargin = {
@@ -31,6 +28,7 @@ var height = svgHeight - chartMargin.top - chartMargin.bottom;
 var chartWidth = svgWidth - chartMargin.left - chartMargin.right;//chartWidth = 900
 var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;//chartHeight = 600
 
+// Select body, append SVG area to it, and set the dimensions; make responsive
 var svg = d3.select(".chart")
   .append("svg")
   .attr("width", '100%')
@@ -40,13 +38,6 @@ var svg = d3.select(".chart")
   .append("g")
   .attr("transform", "translate(" + Math.min(svgWidth,svgHeight) / 2 + "," + Math.min(svgWidth,svgHeight) / 2 + ")");
 
-// Select body, append SVG area to it, and set the dimensions
-/*var svg = d3.select(".chart")
-  .append("svg")
-  .attr("width", svgWidth)
-  .attr("height", svgHeight);*/
-
-  
 // Append a group to the SVG area and shift ('translate') it to the right and down to adhere
 // to the margins set in the "chartMargin" object.
 var chartGroup = svg.append("g")
