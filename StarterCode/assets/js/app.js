@@ -2,7 +2,7 @@
 
 // The code for the chart is wrapped inside a function
 // that automatically resizes the chart
-
+/*
 function makeResponsive() {
 
   // if the SVG area isn't empty when the browser loads, remove it
@@ -12,7 +12,7 @@ function makeResponsive() {
     svgArea.remove();
   }
 }
-
+*/
 // Define the chart's margins as an object
 var chartMargin = {
   top: 30,
@@ -20,6 +20,10 @@ var chartMargin = {
   bottom: 100,
   left: 100
 };
+
+var svgWidth = 1500;
+
+var svgHeight = 900;
 
 var width = svgWidth - chartMargin.left - chartMargin.right;
 var height = svgHeight - chartMargin.top - chartMargin.bottom;
@@ -29,19 +33,20 @@ var chartWidth = svgWidth - chartMargin.left - chartMargin.right;//chartWidth = 
 var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;//chartHeight = 600
 
 // Select body, append SVG area to it, and set the dimensions; make responsive
-var svg = d3.select(".chart")
+var chartGroup = d3.select(".chart")
   .append("svg")
   .attr("width", '100%')
   .attr("height", '100%')
-  .attr('viewBox','0 0 1000 700')// '+Math.min(svgWidth,svgHeight)+' '+Math.min(svgWidth,svgHeight))
-  .attr('preserveAspectRatio','xMinYMin')
+  .attr('viewBox','0 0 1200 900')// +Math.min(svgWidth,svgHeight)+' '+Math.min(svgWidth,svgHeight))
+  .attr('preserveAspectRatio','xMidYMin')
   .append("g")
-  .attr("transform", "translate(" + Math.min(svgWidth,svgHeight) / 2 + "," + Math.min(svgWidth,svgHeight) / 2 + ")");
+  .attr("transform", `translate(${chartMargin.left}, ${chartMargin.top})`);
+  //.attr("transform", "translate(" + Math.min(svgWidth,svgHeight) / 2 + "," + Math.min(svgWidth,svgHeight) / 2 + ")");
 
 // Append a group to the SVG area and shift ('translate') it to the right and down to adhere
 // to the margins set in the "chartMargin" object.
-var chartGroup = svg.append("g")
-  .attr("transform", `translate(${chartMargin.left}, ${chartMargin.top})`);
+//var chartGroup = svg.append("g")
+//  .attr("transform", `translate(${chartMargin.left}, ${chartMargin.top})`);
 
 // Load data from data.csv
 d3.csv("/assets/data/data.csv").then(function(acs_Data) {
